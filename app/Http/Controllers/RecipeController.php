@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Recipe;
 use App\Models\Category;
 
-class RepiceController extends Controller
+class RecipeController extends Controller
 {
     /**
      * Display a listing of the resource.
