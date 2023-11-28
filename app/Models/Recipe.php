@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Recipe extends Model
 {
     protected $table = 'recipes';
+    protected $primaryKey = 'recipe_id';
     protected $guarded = [];
 }

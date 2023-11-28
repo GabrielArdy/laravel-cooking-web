@@ -31,8 +31,23 @@ class RecipeController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        Recipe::create($data);
-        return view('add-recipe');
+        $recipe = Recipe::create([
+            'name' => $data['name'],
+            'ingredients' => $data['ingredients'],
+            'directions' => $data['directions'],
+            'image' => $data['image'],
+            'category' => $data['category'],
+
+        ]);
+
+        if ($request->hasFile('image')) {
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $newName = date('Ymd') . '.' . $extension;
+            $request->file('image')->move('images/', $newName);
+            $recipe->image = $newName;
+            $recipe->save();
+        }
+        return redirect('/recipe');
     }
 
     /**
@@ -64,6 +79,7 @@ class RecipeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Recipe::find($id);
+        $data->delete();
     }
 }

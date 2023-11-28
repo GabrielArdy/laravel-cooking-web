@@ -3,48 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <title>Tambah Resep</title>
+    <link rel="stylesheet" href="{{ asset('css/style-cook.css') }}">
+    <title>Create Recipe</title>
 </head>
 <body>
-    <div class="container d-flex">
-        <div class="card mt-5 mx-auto">
-            <h5 class="card-header">Tambah Resep</h5>
-            <div class="card-body">
-                <form action="" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="nama" class="form-label">Nama Resep</label>
-                        <input type="text" class="form-control" id="nama" name="name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="bahan" class="form-label">Ingredients</label>
-                        <textarea class="form-control " name="ingredients" id="" cols="10" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="langkah" class="form-label">Instruction</label>
-                        <textarea class="form-control " name="directions" id="" cols="10" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="gambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambar" name="image">
-                    </div>
-                    <div class="mb-3">
-                        <label for="kategori" class="form-label">Kategori</label>
-                        <select class="form-select" aria-label="Default select example" id="kategori" name="category">
-                            <option selected>Pilih Kategori</option>
-                            @foreach ($categories as $category)
-                            <option value="{{ $category->name }}">{{ ucfirst($category->name) }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <input type="submit" value="Tambah Resep" class="btn btn-primary">
-                    </div>
-                </form>
+    <header>
+        <!-- Your existing header goes here -->
+    </header>
+
+    <main>
+        <div class="create-recipe-container">
+            <h1>Create Recipe</h1>
+            <form id="createRecipeForm" action="/path-to-your-server-endpoint" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <label for="recipeTitle">Title</label>
+                    <input type="text" id="recipeTitle" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="recipeIngredients">Ingredients</label>
+                    <textarea id="recipeIngredients" name="ingridients" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="recipeInstructions">Instructions</label>
+                    <textarea id="recipeInstructions" name="directions" rows="6" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="recipeImage">Recipe Image</label>
+                    <input type="file" id="recipeImage" name="image" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="recipeCategory">Category</label>
+                    <select id="recipeCategory" name="recipeCategory" required>
+                        <option value="">Select a Category</option>
+                        @foreach ($categories as $category)
+                        <option value="{{ $category->name }}">{{ Str::ucfirst($category->name) }}</option>
+                        @endforeach
+                        <!-- Add more categories as needed -->
+                    </select>
+                </div>
+                <button type="submit">Submit Recipe</button>
+            </form>
         </div>
-    </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </main>
+
+    <footer>
+        <!-- Your existing footer goes here -->
+    </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>

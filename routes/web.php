@@ -15,7 +15,15 @@ use App\Http\Controllers\RecipeController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+Route::get('/about', function () {
+    return view('team');
+});
+
+Route::get('/admin', function () {
+    return view('admin');
 });
 
 Route::get('/recipe', [RecipeController::class, 'create']);
