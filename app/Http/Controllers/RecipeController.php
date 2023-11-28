@@ -14,7 +14,16 @@ class RecipeController extends Controller
     public function index()
     {
         $data = Recipe::all();
+        return view('admin', ['recipes' => $data]);
     }
+
+    public function index_user()
+    {
+        $data = Recipe::all();
+        return view('home', ['recipes' => $data]);
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -47,7 +56,7 @@ class RecipeController extends Controller
             $recipe->image = $newName;
             $recipe->save();
         }
-        return redirect('/recipe');
+        return redirect('/admin');
     }
 
     /**
@@ -63,15 +72,30 @@ class RecipeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = Recipe::find($id);
+        return view('edit', ['recipe' => $data]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $recipe = Recipe::where('recipe_id', $request->recipe_id)->update([
+            'name' => $request->name,
+            'ingredients' => $request->ingredients,
+            'directions' => $request->directions,
+            'category' => $request->category,
+        ]);
+
+        if ($request->hasFile('image')) {
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $newName = date('Ymd') . '.' . $extension;
+            $request->file('image')->move('images/', $newName);
+            $recipe->image = $newName;
+            $recipe->save();
+        }
+        return redirect('/admin');
     }
 
     /**
@@ -81,5 +105,6 @@ class RecipeController extends Controller
     {
         $data = Recipe::find($id);
         $data->delete();
+        return redirect('/admin');
     }
 }

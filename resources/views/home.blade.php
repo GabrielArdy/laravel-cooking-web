@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/style-cook.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Recipe for Your food</title>
 </head>
 
@@ -31,7 +32,19 @@
         </div>   
     </header>
 
-    
+    <section class="mt-5">
+    <h1 class="fs-6 text-center fw-bold">Recipe List</h1>
+    <div class="container d-flex">
+        @foreach ($recipes as $recipe)
+        <div class="card m-auto" style="width: 18rem;">
+            <img src="{{ asset('images/'.$recipe->image) }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text mt-2 text-center fw-bold ">{{ $recipe->name }}</p>
+            </div>
+        </div>
+        @endforeach
+    </div>
+    </section>
 
 <!-- Categories Section -->
 <section id="categories">
@@ -60,6 +73,7 @@
     </div>
 
     <script src="{{ asset('js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>

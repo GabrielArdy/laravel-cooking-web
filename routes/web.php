@@ -14,17 +14,17 @@ use App\Http\Controllers\RecipeController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [RecipeController::class, 'index_user']);
 
 Route::get('/about', function () {
     return view('team');
 });
 
-Route::get('/admin', function () {
-    return view('admin');
-});
+Route::get('/admin', [RecipeController::class, 'index']);
+
+Route::get('/admin/delete/{id}', [RecipeController::class, 'destroy']);
+Route::get('/admin/edit/{id}', [RecipeController::class, 'edit']);
+Route::post('/admin/update/', [RecipeController::class, 'update']);
 
 Route::get('/recipe', [RecipeController::class, 'create']);
 Route::post('/add', [RecipeController::class, 'store']);

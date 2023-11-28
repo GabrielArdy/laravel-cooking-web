@@ -14,19 +14,20 @@
     <main>
         <div class="create-recipe-container">
             <h1>Create Recipe</h1>
-            <form id="createRecipeForm" action="/add" method="post" enctype="multipart/form-data">
+            <form id="createRecipeForm" action="{{url('/admin/update/')}}" method="post" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="recipe_id" value="{{$recipe->recipe_id}}">
                 <div class="form-group">
                     <label for="recipeTitle">Title</label>
-                    <input type="text" id="recipeTitle" name="name" required>
+                    <input type="text" id="recipeTitle" name="name" value="{{$recipe->name}}" required>
                 </div>
                 <div class="form-group">
                     <label for="recipeIngredients">Ingredients</label>
-                    <textarea id="recipeIngredients" name="ingredients" rows="4" required></textarea>
+                    <textarea id="recipeIngredients" name="ingredients" rows="4" required>{{$recipe->ingredients}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="recipeInstructions">Instructions</label>
-                    <textarea id="recipeInstructions" name="directions" rows="6" required></textarea>
+                    <textarea id="recipeInstructions" name="directions" rows="6" required>{{$recipe->directions}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="recipeImage">Recipe Image</label>
@@ -34,13 +35,7 @@
                 </div>
                 <div class="form-group">
                     <label for="recipeCategory">Category</label>
-                    <select id="recipeCategory" name="category" required>
-                        <option value="">Select a Category</option>
-                        @foreach ($categories as $category)
-                        <option value="{{ $category->name }}">{{ Str::ucfirst($category->name) }}</option>
-                        @endforeach
-                        <!-- Add more categories as needed -->
-                    </select>
+                    <input type="text" name="category" id="" value="{{$recipe->category}}">
                 </div>
                 <button type="submit">Submit Recipe</button>
             </form>

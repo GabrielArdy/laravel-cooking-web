@@ -33,7 +33,25 @@
 
     <!-- Admin Interface -->
     <div class="admin-controls">
-        <a href="/recipe" class="btn btn-success fw-bold mt-5 ">Add New Recipe</a>
+        <a href="/recipe" class="btn btn-success fw-bold mt-5 mb-5">Add New Recipe</a>
+    </div>
+
+    <h1 class="fs-6 text-center fw-bold">Recipe List</h1>
+    <div class="container d-flex">
+        @foreach ($recipes as $recipe)
+        <div class="card m-auto" style="width: 18rem;">
+            <img src="{{ asset('images/'.$recipe->image) }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text mt-2 text-center fw-bold ">{{ $recipe->name }}</p>
+                <div class="container d-flex">
+                    <div class="btn-group mx-auto" role="group" aria-label="Basic mixed styles example">
+                        <a href="/admin/delete/{{ $recipe->recipe_id }}" class="btn btn-danger">Delete</a>
+                        <a href="/admin/edit/{{ $recipe->recipe_id }}" class="btn btn-warning">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
     </div>
       <!-- The rest of your HTML -->
       
